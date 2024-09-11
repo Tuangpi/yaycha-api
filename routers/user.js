@@ -1,6 +1,9 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const prisma = require("../prismaClient");
+const { auth } = require("../middlewares/auth");
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
@@ -48,6 +51,11 @@ router.post("/users", async (req, res) => {
     const user = await prisma.user.create({
         data: { name, username, password: hash, bio, },
     });
+    res.json(user);
+});
+
+router.get("/verify", auth, async (req, res) => {
+    const user = res.locals.user;
     res.json(user);
 });
 
