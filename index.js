@@ -1,11 +1,17 @@
+
 const express = require("express");
 const app = express();
+require("express-ws")(app);
 const prisma = require("./prismaClient");
 const cors = require("cors");
+
 app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const { wsRouter } = require("./routers/ws");
+app.use("/", wsRouter);
 
 const { userRouter } = require("./routers/user");
 app.use("/", userRouter);
