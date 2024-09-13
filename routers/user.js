@@ -1,8 +1,8 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const prisma = require("../prismaClient");
+const jwt = require("jsonwebtoken");
 const { auth } = require("../middlewares/auth");
 
 router.post("/login", async (req, res) => {

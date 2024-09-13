@@ -11,19 +11,19 @@ datasource db {
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  name         String
-  username     String        @unique
-  bio          String?
-  password     String
-  posts        Post[]
-  comments     Comment[]
-  PostLikes    PostLike[]
-  CommentLikes CommentLike[]
-  followers    Follow[]      @relation("followers")
-  following    Follow[]      @relation("following")
-  created      DateTime      @default(now())
-  notis        Noti[]
+  id          Int           @id @default(autoincrement())
+  name        String
+  username    String        @unique
+  bio         String?
+  password    String
+  Comment     Comment[]
+  PostLike    PostLike[]
+  CommentLike CommentLike[]
+  Post        Post[]
+  Followers   Follow[]      @relation("followers")
+  Following   Follow[]      @relation("following")
+  Noti        Noti[]
+  created     DateTime      @default(now())
 }
 
 model Post {
@@ -31,21 +31,21 @@ model Post {
   content  String
   user     User       @relation(fields: [userId], references: [id])
   userId   Int
-  comments Comment[]
-  created  DateTime   @default(now())
+  Comment  Comment[]
   PostLike PostLike[]
-  notis    Noti[]
+  Noti     Noti[]
+  created  DateTime   @default(now())
 }
 
 model Comment {
-  id           Int           @id @default(autoincrement())
-  content      String
-  user         User          @relation(fields: [userId], references: [id])
-  userId       Int
-  post         Post          @relation(fields: [postId], references: [id])
-  postId       Int
-  created      DateTime      @default(now())
-  CommentLikes CommentLike[]
+  id          Int           @id @default(autoincrement())
+  content     String
+  user        User          @relation(fields: [userId], references: [id])
+  userId      Int
+  post        Post          @relation(fields: [postId], references: [id])
+  postId      Int
+  created     DateTime      @default(now())
+  CommentLike CommentLike[]
 }
 
 model PostLike {

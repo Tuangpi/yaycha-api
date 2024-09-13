@@ -1,6 +1,5 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const prisma = require("../prismaClient");
 /***
 * @param {express.Request} req
 * @param {express.Response} res
@@ -20,6 +19,9 @@ function auth(req, res, next) {
     next();
 }
 
+/***
+* @param {('post'|'comment')} type
+*/
 function isOwner(type) {
     /***
     * @param {express.Request} req
